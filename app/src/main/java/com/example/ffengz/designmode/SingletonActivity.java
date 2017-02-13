@@ -14,6 +14,8 @@ import com.example.ffengz.designmode.interpreter.AddOperatorExpression;
 import com.example.ffengz.designmode.interpreter.Expression;
 import com.example.ffengz.designmode.interpreter.NumExpression;
 import com.example.ffengz.designmode.interpreter.SubOperatorExpression;
+import com.example.ffengz.designmode.iterator.ConcreteContainer;
+import com.example.ffengz.designmode.iterator.Iterator;
 import com.example.ffengz.designmode.memento.Caretaker;
 import com.example.ffengz.designmode.memento.GameOriginator;
 import com.example.ffengz.designmode.observer.ConcreteObserver;
@@ -149,20 +151,29 @@ public class SingletonActivity extends AppCompatActivity {
 //        observable.attach(observerC);
 //        // 假设发生改变，进行通知
 //        observable.notifyObservers("下雨了！！！");
+//
+//        //备忘录模式
+//        GameOriginator game = new GameOriginator();
+//        Log.i("info", "onCreate: ==++" + game.toString());
+//        game.play();
+//        Log.i("info", "onCreate: ==++" + game.toString());
+//        // 存档
+//        Caretaker caretaker = new Caretaker();
+//        caretaker.add(game.createMememto());
+//        // 退出   下一次进入 读档
+//        GameOriginator newGame = new GameOriginator();
+//        newGame.restore(caretaker.getMemento(0));
+//        Log.i("info", "onCreate: ==++" + newGame.toString());
 
-        //备忘录模式
-        GameOriginator game = new GameOriginator();
-        Log.i("info", "onCreate: ==++" + game.toString());
-        game.play();
-        Log.i("info", "onCreate: ==++" + game.toString());
-        // 存档
-        Caretaker caretaker = new Caretaker();
-        caretaker.add(game.createMememto());
-        // 退出   下一次进入 读档
-        GameOriginator newGame = new GameOriginator();
-        newGame.restore(caretaker.getMemento(0));
-        Log.i("info", "onCreate: ==++" + newGame.toString());
-
+        ConcreteContainer concreteContainer = new ConcreteContainer();
+        concreteContainer.add("第1条");
+        concreteContainer.add("第2条");
+        concreteContainer.add("第3条");
+        concreteContainer.add("第4条");
+        Iterator iterator = concreteContainer.getIterator();
+        while (iterator.hasNext()){
+            Log.i("info", "onCreate: ==++" + iterator.next());
+        }
     }
 
     // 声明计算器栈  保存所有运算信息
