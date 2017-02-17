@@ -20,6 +20,11 @@ import com.example.ffengz.designmode.memento.Caretaker;
 import com.example.ffengz.designmode.memento.GameOriginator;
 import com.example.ffengz.designmode.observer.ConcreteObserver;
 import com.example.ffengz.designmode.observer.ConcreteSubject;
+import com.example.ffengz.designmode.template.ElephantPut;
+import com.example.ffengz.designmode.template.XiaoMingPut;
+import com.example.ffengz.designmode.visitor.FemaleReportVisitor;
+import com.example.ffengz.designmode.visitor.MaleReportVisitor;
+import com.example.ffengz.designmode.visitor.Team;
 
 import java.math.BigDecimal;
 import java.util.Stack;
@@ -164,16 +169,29 @@ public class SingletonActivity extends AppCompatActivity {
 //        GameOriginator newGame = new GameOriginator();
 //        newGame.restore(caretaker.getMemento(0));
 //        Log.i("info", "onCreate: ==++" + newGame.toString());
+//
+//        ConcreteContainer concreteContainer = new ConcreteContainer();
+//        concreteContainer.add("第1条");
+//        concreteContainer.add("第2条");
+//        concreteContainer.add("第3条");
+//        concreteContainer.add("第4条");
+//        Iterator iterator = concreteContainer.getIterator();
+//        while (iterator.hasNext()){
+//            Log.i("info", "onCreate: ==++" + iterator.next());
+//        }
 
-        ConcreteContainer concreteContainer = new ConcreteContainer();
-        concreteContainer.add("第1条");
-        concreteContainer.add("第2条");
-        concreteContainer.add("第3条");
-        concreteContainer.add("第4条");
-        Iterator iterator = concreteContainer.getIterator();
-        while (iterator.hasNext()){
-            Log.i("info", "onCreate: ==++" + iterator.next());
-        }
+//        // 模版模式
+//        ElephantPut elephantPut = new ElephantPut();
+//        elephantPut.putInSomething();
+//        XiaoMingPut xiaoMingPut = new XiaoMingPut();
+//        xiaoMingPut.putInSomething();
+
+        // 访问者模式
+        Team team = new Team();
+        // 为男性访问者展示数据
+        team.getInfo(new MaleReportVisitor());
+        // 为女相访问这展示数据
+        team.getInfo(new FemaleReportVisitor());
     }
 
     // 声明计算器栈  保存所有运算信息
