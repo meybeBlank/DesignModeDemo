@@ -16,6 +16,10 @@ import com.example.ffengz.designmode.interpreter.NumExpression;
 import com.example.ffengz.designmode.interpreter.SubOperatorExpression;
 import com.example.ffengz.designmode.iterator.ConcreteContainer;
 import com.example.ffengz.designmode.iterator.Iterator;
+import com.example.ffengz.designmode.mediator.CenterBank;
+import com.example.ffengz.designmode.mediator.L4Seller;
+import com.example.ffengz.designmode.mediator.Mediator;
+import com.example.ffengz.designmode.mediator.Z3Buyer;
 import com.example.ffengz.designmode.memento.Caretaker;
 import com.example.ffengz.designmode.memento.GameOriginator;
 import com.example.ffengz.designmode.observer.ConcreteObserver;
@@ -186,12 +190,24 @@ public class SingletonActivity extends AppCompatActivity {
 //        XiaoMingPut xiaoMingPut = new XiaoMingPut();
 //        xiaoMingPut.putInSomething();
 
-        // 访问者模式
-        Team team = new Team();
-        // 为男性访问者展示数据
-        team.getInfo(new MaleReportVisitor());
-        // 为女相访问这展示数据
-        team.getInfo(new FemaleReportVisitor());
+//        // 访问者模式
+//        Team team = new Team();
+//        // 为男性访问者展示数据
+//        team.getInfo(new MaleReportVisitor());
+//        // 为女相访问这展示数据
+//        team.getInfo(new FemaleReportVisitor());
+
+        // 中间者模式
+        Mediator mediator = new Mediator();
+        Z3Buyer z3Buyer = new Z3Buyer(mediator);
+        L4Seller l4Seller = new L4Seller(mediator);
+        CenterBank centerBank = new CenterBank(mediator);
+        // 对象设置
+        mediator.setmBuyer(z3Buyer);
+        mediator.setmSeller(l4Seller);
+        mediator.setmBank(centerBank);
+        // 张三买房
+        z3Buyer.buyHouse();
     }
 
     // 声明计算器栈  保存所有运算信息
