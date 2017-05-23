@@ -10,6 +10,9 @@ import com.example.ffengz.designmode.command.Invoker2;
 import com.example.ffengz.designmode.command.Operator;
 import com.example.ffengz.designmode.command.TurnOffCommand;
 import com.example.ffengz.designmode.command.TurnOnCommand;
+import com.example.ffengz.designmode.composite.Component;
+import com.example.ffengz.designmode.composite.Leaf;
+import com.example.ffengz.designmode.composite.Truck;
 import com.example.ffengz.designmode.interpreter.AddOperatorExpression;
 import com.example.ffengz.designmode.interpreter.Expression;
 import com.example.ffengz.designmode.interpreter.NumExpression;
@@ -211,11 +214,23 @@ public class SingletonActivity extends AppCompatActivity {
 //        // 张三买房
 //        z3Buyer.buyHouse();
 
-        // 代理模式
-        RealSurfing realSurfing = new RealSurfing();
-        ProxySurfing proxySurfing = new ProxySurfing(realSurfing);
-        // 通过代理访问真实的上网
-        proxySurfing.surfing();
+//        // 代理模式
+//        RealSurfing realSurfing = new RealSurfing();
+//        ProxySurfing proxySurfing = new ProxySurfing(realSurfing);
+//        // 通过代理访问真实的上网
+//        proxySurfing.surfing();
+
+        // 组合模式
+        // 根节点
+        Component root = new Truck("root");
+        // 为根节点创建并添加子节点
+        Truck truck1 = new Truck("truck1");
+        Leaf leaf1 = new Leaf("leaf1");
+        root.addChild(truck1);
+        root.addChild(leaf1);
+        // 为树干节点创建添加子节点
+        Leaf leaf2 = new Leaf("leaf2");
+        truck1.addChild(leaf2);
     }
 
     // 声明计算器栈  保存所有运算信息
