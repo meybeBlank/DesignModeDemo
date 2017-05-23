@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.ffengz.designmode.adapter.GTX10;
+import com.example.ffengz.designmode.adapter.HdmiToVgaAdapter;
 import com.example.ffengz.designmode.command.Invoker;
 import com.example.ffengz.designmode.command.Invoker2;
 import com.example.ffengz.designmode.command.Operator;
@@ -220,17 +222,21 @@ public class SingletonActivity extends AppCompatActivity {
 //        // 通过代理访问真实的上网
 //        proxySurfing.surfing();
 
-        // 组合模式
-        // 根节点
-        Component root = new Truck("root");
-        // 为根节点创建并添加子节点
-        Truck truck1 = new Truck("truck1");
-        Leaf leaf1 = new Leaf("leaf1");
-        root.addChild(truck1);
-        root.addChild(leaf1);
-        // 为树干节点创建添加子节点
-        Leaf leaf2 = new Leaf("leaf2");
-        truck1.addChild(leaf2);
+//        // 组合模式
+//        // 根节点
+//        Component root = new Truck("root");
+//        // 为根节点创建并添加子节点
+//        Truck truck1 = new Truck("truck1");
+//        Leaf leaf1 = new Leaf("leaf1");
+//        root.addChild(truck1);
+//        root.addChild(leaf1);
+//        // 为树干节点创建添加子节点
+//        Leaf leaf2 = new Leaf("leaf2");
+//        truck1.addChild(leaf2);
+
+        // 适配器模式
+        HdmiToVgaAdapter hdmiToVgaAdapter = new HdmiToVgaAdapter(new GTX10());
+        hdmiToVgaAdapter.needVGA();
     }
 
     // 声明计算器栈  保存所有运算信息
