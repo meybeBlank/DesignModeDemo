@@ -5,39 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.ffengz.designmode.adapter.GTX10;
-import com.example.ffengz.designmode.adapter.HdmiToVgaAdapter;
-import com.example.ffengz.designmode.command.Invoker;
-import com.example.ffengz.designmode.command.Invoker2;
-import com.example.ffengz.designmode.command.Operator;
-import com.example.ffengz.designmode.command.TurnOffCommand;
-import com.example.ffengz.designmode.command.TurnOnCommand;
-import com.example.ffengz.designmode.composite.Component;
-import com.example.ffengz.designmode.composite.Leaf;
-import com.example.ffengz.designmode.composite.Truck;
+import com.example.ffengz.designmode.decorator.AlbumPhotos;
+import com.example.ffengz.designmode.decorator.PackPhotos;
+import com.example.ffengz.designmode.decorator.Selfie;
 import com.example.ffengz.designmode.interpreter.AddOperatorExpression;
 import com.example.ffengz.designmode.interpreter.Expression;
 import com.example.ffengz.designmode.interpreter.NumExpression;
 import com.example.ffengz.designmode.interpreter.SubOperatorExpression;
-import com.example.ffengz.designmode.iterator.ConcreteContainer;
-import com.example.ffengz.designmode.iterator.Iterator;
-import com.example.ffengz.designmode.mediator.CenterBank;
-import com.example.ffengz.designmode.mediator.L4Seller;
-import com.example.ffengz.designmode.mediator.Mediator;
-import com.example.ffengz.designmode.mediator.Z3Buyer;
-import com.example.ffengz.designmode.memento.Caretaker;
-import com.example.ffengz.designmode.memento.GameOriginator;
-import com.example.ffengz.designmode.observer.ConcreteObserver;
-import com.example.ffengz.designmode.observer.ConcreteSubject;
-import com.example.ffengz.designmode.proxy.ProxySurfing;
-import com.example.ffengz.designmode.proxy.RealSurfing;
-import com.example.ffengz.designmode.template.ElephantPut;
-import com.example.ffengz.designmode.template.XiaoMingPut;
-import com.example.ffengz.designmode.visitor.FemaleReportVisitor;
-import com.example.ffengz.designmode.visitor.MaleReportVisitor;
-import com.example.ffengz.designmode.visitor.Team;
 
-import java.math.BigDecimal;
 import java.util.Stack;
 
 public class SingletonActivity extends AppCompatActivity {
@@ -234,9 +209,21 @@ public class SingletonActivity extends AppCompatActivity {
 //        Leaf leaf2 = new Leaf("leaf2");
 //        truck1.addChild(leaf2);
 
-        // 适配器模式
-        HdmiToVgaAdapter hdmiToVgaAdapter = new HdmiToVgaAdapter(new GTX10());
-        hdmiToVgaAdapter.needVGA();
+//        // 适配器模式
+//        HdmiToVgaAdapter hdmiToVgaAdapter = new HdmiToVgaAdapter(new GTX10());
+//        hdmiToVgaAdapter.needVGA();
+
+        // 装饰模式
+        // 创建一个自拍
+        Selfie selfie = new Selfie("大帅比的自拍");
+        Log.i("info", "onCreate:==++ " + selfie.getPhoto());
+        // 创建装饰类
+        PackPhotos packPhotos = new PackPhotos(selfie);
+        // 调用装饰之后的照片对象方法
+        Log.i("info", "onCreate:==++ " + packPhotos.getPhoto());
+        AlbumPhotos albumPhotos = new AlbumPhotos(selfie);
+        Log.i("info", "onCreate:==++ " + albumPhotos.getPhoto());
+
     }
 
     // 声明计算器栈  保存所有运算信息
@@ -244,6 +231,7 @@ public class SingletonActivity extends AppCompatActivity {
 
     /**
      * 计算方法
+     *
      * @param context 计算表达式
      */
     private int calculator(@NonNull String context) {
