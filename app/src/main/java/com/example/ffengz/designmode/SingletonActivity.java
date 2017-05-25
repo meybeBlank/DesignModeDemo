@@ -8,6 +8,8 @@ import android.util.Log;
 import com.example.ffengz.designmode.decorator.AlbumPhotos;
 import com.example.ffengz.designmode.decorator.PackPhotos;
 import com.example.ffengz.designmode.decorator.Selfie;
+import com.example.ffengz.designmode.flyweight.Ticket;
+import com.example.ffengz.designmode.flyweight.TicketFactory;
 import com.example.ffengz.designmode.interpreter.AddOperatorExpression;
 import com.example.ffengz.designmode.interpreter.Expression;
 import com.example.ffengz.designmode.interpreter.NumExpression;
@@ -213,17 +215,27 @@ public class SingletonActivity extends AppCompatActivity {
 //        HdmiToVgaAdapter hdmiToVgaAdapter = new HdmiToVgaAdapter(new GTX10());
 //        hdmiToVgaAdapter.needVGA();
 
-        // 装饰模式
-        // 创建一个自拍
-        Selfie selfie = new Selfie("大帅比的自拍");
-        Log.i("info", "onCreate:==++ " + selfie.getPhoto());
-        // 创建装饰类
-        PackPhotos packPhotos = new PackPhotos(selfie);
-        // 调用装饰之后的照片对象方法
-        Log.i("info", "onCreate:==++ " + packPhotos.getPhoto());
-        AlbumPhotos albumPhotos = new AlbumPhotos(selfie);
-        Log.i("info", "onCreate:==++ " + albumPhotos.getPhoto());
+//        // 装饰模式
+//        // 创建一个自拍
+//        Selfie selfie = new Selfie("大帅比的自拍");
+//        Log.i("info", "onCreate:==++ " + selfie.getPhoto());
+//        // 创建装饰类
+//        PackPhotos packPhotos = new PackPhotos(selfie);
+//        // 调用装饰之后的照片对象方法
+//        Log.i("info", "onCreate:==++ " + packPhotos.getPhoto());
+//        AlbumPhotos albumPhotos = new AlbumPhotos(selfie);
+//        Log.i("info", "onCreate:==++ " + albumPhotos.getPhoto());
 
+        // 享元模式
+        Ticket ticket1 = TicketFactory.getTicket("北京", "上海");
+        Ticket ticket2 = TicketFactory.getTicket("北京", "成都");
+        Ticket ticket3 = TicketFactory.getTicket("北京", "上海");
+        Log.i("info", "onCreate: ==++" + ticket1.toString());
+        ticket1.showSite();
+        Log.i("info", "onCreate: ==++" + ticket2.toString());
+        ticket2.showSite();
+        Log.i("info", "onCreate: ==++" + ticket3.toString());
+        ticket3.showSite();
     }
 
     // 声明计算器栈  保存所有运算信息
