@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
+import com.example.ffengz.designmode.bridge.FiftyMoneyImpl;
+import com.example.ffengz.designmode.bridge.GuoTaiFund;
+import com.example.ffengz.designmode.bridge.HuiFengFund;
+import com.example.ffengz.designmode.bridge.TenMoneyImpl;
 import com.example.ffengz.designmode.decorator.AlbumPhotos;
 import com.example.ffengz.designmode.decorator.PackPhotos;
 import com.example.ffengz.designmode.decorator.Selfie;
@@ -239,10 +243,21 @@ public class SingletonActivity extends AppCompatActivity {
 //        Log.i("info", "onCreate: ==++" + ticket3.toString());
 //        ticket3.showSite();
 
-        // 外观模式
-        Phone phone = new Phone();
-        phone.takePhotos();
-        phone.callTo("张三的手机111");
+//        // 外观模式
+//        Phone phone = new Phone();
+//        phone.takePhotos();
+//        phone.callTo("张三的手机111");.
+
+        // 桥接模式
+        // 创建具体的金额
+        TenMoneyImpl tenMoney = new TenMoneyImpl();
+        FiftyMoneyImpl fiftyMoney = new FiftyMoneyImpl();
+        // 创建不同的定投基金
+        GuoTaiFund guoTaiFund = new GuoTaiFund(tenMoney);
+        HuiFengFund huiFengFund = new HuiFengFund(fiftyMoney);
+        // 打印基本信息
+        guoTaiFund.info();
+        huiFengFund.info();
     }
 
     // 声明计算器栈  保存所有运算信息
